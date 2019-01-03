@@ -137,6 +137,8 @@ function(
 	perm_test = data.frame(Effect=term_labels)
 	perm_test$p = rowMeans(sim>=obs)
 	perm_test$'p<.05' = ifelse(perm_test$p<.05,'*','')
+	perm_test$'Statistic' = obs
+	perm_test$'CI' = t(apply(sim,1,quantile,probs=c(0.05,0.95)))
 	if(alarm){
 		alarm()
 	}
